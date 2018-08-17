@@ -1,0 +1,38 @@
+ <!--CLIENTS SEARCH BOX BEGIN HERE-->
+
+ <nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand">Clients</a>
+  <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-primary my-2 my-sm-0 mx-1" type="submit">Search</button>
+      <button class="btn btn-primary my-2 my-sm-0 mx-1" type="submit">
+          <i class="fa fa-plus"></i>
+      </button>
+  </form>
+</nav>
+
+<!--CLIENTS SEARCH BOX END HERE-->
+<!--CLIENT TABLE BEGIN HERE-->
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+      <thead>
+          <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Mobile</th>
+              <th scope="col">Address</th>
+          </tr>
+      </thead>
+      <tr *ngFor="let client of clients; let i = index;" (click)="select(client)">
+          <th scope="row">{{i+1}}</th>
+          <td>{{client.Name}}</td>
+          <td>{{client.Email}}</td>
+          <td>{{client.Mobile}}</td>
+          <td>{{client.Address}}</td>
+      </tr>
+  </table>
+</div>
+
+<!--CLIENT TABLE END HERE-->
