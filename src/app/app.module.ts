@@ -13,6 +13,10 @@ import { AddTonerComponent } from './add-toner/add-toner.component';
 import { ClientInfoComponent } from './client-info/client-info.component';
 import { EditClientComponent } from './edit-client/edit-client.component';
 import { EditTonerComponent } from './edit-toner/edit-toner.component';
+import { StocksComponent } from './stocks/stocks.component';
+import { StockManagerComponent } from './stock-manager/stock-manager.component';
+import { TonerPartsComponent } from './toner-parts/toner-parts.component';
+import { PartTypesComponent } from './part-types/part-types.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { EditTonerComponent } from './edit-toner/edit-toner.component';
     AddTonerComponent,
     ClientInfoComponent,
     EditClientComponent,
-    EditTonerComponent
+    EditTonerComponent,
+    StocksComponent,
+    StockManagerComponent,
+    TonerPartsComponent,
+    PartTypesComponent
   ],
   imports: [
     BrowserModule,
