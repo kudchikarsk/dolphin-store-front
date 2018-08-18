@@ -1,3 +1,27 @@
-<p>
-  toner-parts works!
-</p>
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand">Toner Parts</a>
+  <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary my-2 my-sm-0 mx-1" type="submit">Search</button>
+        <a class="btn btn-primary my-2 my-sm-0 mx-1" routerLink="/toner-parts/add">
+            <i class="fa fa-plus"></i>
+        </a>
+  </form>
+</nav>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+      <thead>
+          <tr>
+              <th scope="col">Name</th>
+              <th scope="col"></th>
+          </tr>
+      </thead>
+      <tr *ngFor="let tonerPart of tonerParts; let i = index;">
+            <td>{{tonerPart.Name}}</td>
+            <td>
+                <a class="btn" routerLink="/toner-parts/edit/{{tonerPart.Id}}"><i class="fa fa-pencil"></i></a>
+            </td>
+      </tr>
+  </table>
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Stock } from '../models/stock';
+import { StockItem } from '../models/stock';
 import { StockService } from '../stock.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { StockService } from '../stock.service';
   styleUrls: ['./stocks.component.css']
 })
 export class StocksComponent implements OnInit {
-  stocks:Stock[];
+  stocks:StockItem[];
 
   constructor(private stockService:StockService) { }
 

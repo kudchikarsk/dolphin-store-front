@@ -16,7 +16,6 @@ import { EditTonerComponent } from './edit-toner/edit-toner.component';
 import { StocksComponent } from './stocks/stocks.component';
 import { StockManagerComponent } from './stock-manager/stock-manager.component';
 import { TonerPartsComponent } from './toner-parts/toner-parts.component';
-import { PartTypesComponent } from './part-types/part-types.component';
 
 @NgModule({
   declarations: [
@@ -32,8 +31,7 @@ import { PartTypesComponent } from './part-types/part-types.component';
     EditTonerComponent,
     StocksComponent,
     StockManagerComponent,
-    TonerPartsComponent,
-    PartTypesComponent
+    TonerPartsComponent
   ],
   imports: [
     BrowserModule,

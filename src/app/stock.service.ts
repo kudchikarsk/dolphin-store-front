@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Stock, PartType, TonerPart } from './models/stock';
-import { STOCKS, PARTS, TONER_PARTS } from './mocks/mock-stocks';
+import { StockItem, TonerPart } from './models/stock';
+import { STOCKS, TONER_PARTS } from './mocks/mock-stocks';
 
 @Injectable({
   providedIn: 'root'
@@ -10,20 +10,12 @@ export class StockService {
 
   constructor() { }
 
-  getStocks():Observable<Stock[]>{
+  getStocks():Observable<StockItem[]>{
     return of(STOCKS);
   }
 
-  getStock(id:number):Observable<Stock>{
+  getStock(id:number):Observable<StockItem>{
     return of(STOCKS.find(s=>s.Id==id));
-  }
-
-  getPartTypes():Observable<PartType[]>{
-    return of(PARTS);
-  }
-
-  getPartType(id:number):Observable<PartType>{
-    return of(PARTS.find(p=>p.Id==id));
   }
 
   getTonerParts():Observable<TonerPart[]>{

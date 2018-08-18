@@ -16,17 +16,16 @@
                 <th scope="col">Name</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Selling Price (per unit)</th>
-                <th scope="col">Bought at (per unit)</th>
+                <th scope="col">Cost Price (per unit)</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tr *ngFor="let stock of stocks; let i = index;">
               <td>{{stock.Name}}</td>
               <td>{{stock.Quantity}}</td>
-              <td>{{stock.UnitSellingPrice}}</td>
-              <td>{{stock.UnitPrice}}</td>
+              <td>{{stock.SellingPrice}}</td>
+              <td>{{stock.CostPrice}}</td>
               <td>
-                  <a class="btn" routerLink="/stocks/view/{{stock.Id}}"><i class="fa fa-eye"></i></a>
                   <a class="btn" routerLink="/stocks/edit/{{stock.Id}}"><i class="fa fa-pencil"></i></a>
               </td>
         </tr>
