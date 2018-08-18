@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from "./../models/client";
-import { CLIENTS } from "./../mocks/mock-clients";
+import { ClientService } from "./../client.service";
 
 @Component({
   selector: 'app-clients',
@@ -11,10 +11,10 @@ export class ClientsComponent implements OnInit {
   
   clients:Array<Client>=[];
 
-  constructor() { }
+  constructor(private clientService:ClientService) { }
 
   ngOnInit() {
-    this.clients=CLIENTS;
+    this.clientService.getClients().subscribe(c=> this.clients=c);
   }
 
 }
