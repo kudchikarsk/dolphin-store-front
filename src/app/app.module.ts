@@ -16,6 +16,11 @@ import { EditTonerComponent } from './edit-toner/edit-toner.component';
 import { StocksComponent } from './stocks/stocks.component';
 import { StockManagerComponent } from './stock-manager/stock-manager.component';
 import { TonerPartsComponent } from './toner-parts/toner-parts.component';
+import { EditTonerPartsComponent } from './edit-toner-parts/edit-toner-parts.component';
+import { AddTonerPartsComponent } from './add-toner-parts/add-toner-parts.component';
+import { AddStockComponent } from './add-stock/add-stock.component';
+import { EditStockComponent } from './edit-stock/edit-stock.component';
+import { TonerPartDropdownComponent } from './toner-part-dropdown/toner-part-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +36,12 @@ import { TonerPartsComponent } from './toner-parts/toner-parts.component';
     EditTonerComponent,
     StocksComponent,
     StockManagerComponent,
-    TonerPartsComponent
+    TonerPartsComponent,
+    EditTonerPartsComponent,
+    AddTonerPartsComponent,
+    AddStockComponent,
+    EditStockComponent,
+    TonerPartDropdownComponent
   ],
   imports: [
     BrowserModule,
