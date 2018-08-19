@@ -4,4 +4,8 @@ export class Client{
     Address:string;
     Mobile:string;
     Email:string;
+
+    constructor(name:string=null){
+        this.Name=name;
+    }
 }
