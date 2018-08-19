@@ -16,8 +16,4 @@ export class StocksComponent implements OnInit {
     this.stockService.getStocks().subscribe(s=>this.stocks=s);
   }
 
-  update(stockItem:StockItem){
-    console.log("update stockItem:"+JSON.stringify(stockItem));
-  }
-
 }

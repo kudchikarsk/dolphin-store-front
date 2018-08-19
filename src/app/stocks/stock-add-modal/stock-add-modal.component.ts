@@ -19,6 +19,7 @@ export class StockAddModalComponent implements OnInit {
   }
 
   add(){
+    console.log("add stock:"+JSON.stringify(this.stockItem));
     this.close();
   }
 
