@@ -1,0 +1,19 @@
+<ng-container *ngIf="!isEditable">
+    <td>{{stock.Name}}</td>
+    <td>{{stock.Quantity}}</td>
+    <td>{{stock.SellingPrice}}</td>
+    <td>{{stock.CostPrice}}</td>
+    <td>
+        <button class="btn btn-outline-primary" (click)="isEditable=true" ><i class="fa fa-pencil"></i></button>
+    </td>
+</ng-container>
+<ng-container *ngIf="isEditable">
+    <td><input type="text" class="form-control" [(ngModel)]="edit.Name"></td>
+    <td><input type="text" class="form-control" [(ngModel)]="edit.Quantity"></td>
+    <td><input type="text" class="form-control" [(ngModel)]="edit.SellingPrice"></td>
+    <td><input type="text" class="form-control" [(ngModel)]="edit.CostPrice"></td>
+    <td>
+        <button class="btn btn-primary" (click)="update()" ><i class="fa fa-save"></i></button>
+        <button class="btn btn-outline-primary" (click)="cancel()" ><i class="fa fa-ban"></i></button>
+    </td>
+</ng-container>

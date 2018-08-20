@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ElementRef, Inject, ViewChild } from '@angular/core';
-import { Client } from '../../../../models/client';
-import { Toner } from '../../../../models/toner';
-import { JQ_TOKEN } from '../../../../jquery.service';
+import { UiModalComponent } from '../ui-modal/ui-modal.component';
+import { Toner } from '../models/toner';
 
 @Component({
   selector: 'app-toner-add-modal',
@@ -10,15 +9,15 @@ import { JQ_TOKEN } from '../../../../jquery.service';
 })
 export class TonerAddModalComponent implements OnInit {
   @Input() clientId:number;
+  @ViewChild(UiModalComponent) modal: UiModalComponent;
   toner:Toner;
-  @ViewChild('modal') modalEle: ElementRef;
 
-  constructor(@Inject(JQ_TOKEN) private $:any) { 
+  constructor() { 
 
   }
 
   ngOnInit() {
-    this.toner=new Toner(this.clientId);
+    this.toner=new Toner(undefined,this.clientId);
   }
 
   add(){
@@ -31,8 +30,8 @@ export class TonerAddModalComponent implements OnInit {
   }
 
   close(): void {
-    this.toner=new Toner(this.clientId);
-    this.$(this.modalEle.nativeElement).modal('hide');    
+    this.toner=new Toner(undefined,this.clientId);
+    this.modal.close();    
   }
 
 }

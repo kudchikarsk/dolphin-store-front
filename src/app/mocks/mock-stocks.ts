@@ -1,10 +1,10 @@
 import { StockItem } from "../models/stock";
 
 export const STOCKS:StockItem[]=[
-    {Id:1, Name:"Epson L800" , CostPrice:0, SellingPrice:0, Quantity: 2},
-    {Id:2, Name:"Epson L100" , CostPrice:0, SellingPrice:0, Quantity: 2},
-    {Id:3, Name:"Epson 200"  , CostPrice:0, SellingPrice:0, Quantity: 2},
-    {Id:4, Name:"Epson L800" , CostPrice:0, SellingPrice:0, Quantity: 2},
-    {Id:5, Name:"Epson L100" , CostPrice:0, SellingPrice:0, Quantity: 2},
-    {Id:6, Name:"Epson 200"  , CostPrice:0, SellingPrice:0, Quantity: 2},
+    new StockItem(1, "Epson L800", 0, 0, 2),
+    new StockItem(2, "Epson L100", 0, 0, 2),
+    new StockItem(3, "Epson 200" , 0, 0, 2),
+    new StockItem(4, "Epson L800", 0, 0, 2),
+    new StockItem(5, "Epson L100", 0, 0, 2),
+    new StockItem(6, "Epson 200" , 0, 0, 2),
 ];

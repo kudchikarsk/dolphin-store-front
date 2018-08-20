@@ -1,6 +1,6 @@
-import { Component, OnInit, ElementRef, ViewChild, Inject } from '@angular/core';
-import { StockItem } from '../../models/stock';
-import { JQ_TOKEN } from '../../jquery.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { UiModalComponent } from '../ui-modal/ui-modal.component';
+import { StockItem } from '../models/stock';
 
 @Component({
   selector: 'app-stock-add-modal',
@@ -8,10 +8,10 @@ import { JQ_TOKEN } from '../../jquery.service';
   styleUrls: ['./stock-add-modal.component.css']
 })
 export class StockAddModalComponent implements OnInit {
+  @ViewChild(UiModalComponent) modal:UiModalComponent;
   stockItem:StockItem;
-  @ViewChild("modal") modalEle:ElementRef;
 
-  constructor(@Inject(JQ_TOKEN) private $:any) { 
+  constructor() { 
     this.stockItem=new StockItem();
   }
 
@@ -29,7 +29,7 @@ export class StockAddModalComponent implements OnInit {
 
   close(): void {
     this.stockItem=new StockItem();
-    this.$(this.modalEle.nativeElement).modal('hide');    
+    this.modal.close();
   }
 
 }

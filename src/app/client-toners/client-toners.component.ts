@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Toner } from './../../../models/toner';
-import { ClientService } from './../../../client.service';
+import { Toner } from '../models/toner';
+import { ClientService } from '../client.service';
 
 @Component({
   selector: 'app-client-toners',

@@ -1,0 +1,10 @@
+ <!-- Modal -->
+ <div #modal  class="modal fade" id="{{ modalId }}" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <ng-content select=".modal-header"></ng-content>
+        <ng-content select=".modal-body"></ng-content>  
+        <ng-content select=".modal-footer"></ng-content>
+      </div>
+    </div>
+  </div>

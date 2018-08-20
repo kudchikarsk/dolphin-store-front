@@ -23,15 +23,7 @@
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                <tr *ngFor="let stock of stocks; let i = index;">
-                        <td>{{stock.Name}}</td>
-                        <td>{{stock.Quantity}}</td>
-                        <td>{{stock.SellingPrice}}</td>
-                        <td>{{stock.CostPrice}}</td>
-                        <td>
-                            <button class="btn btn-outline-primary" ><i class="fa fa-pencil"></i></button>
-                        </td>
-                </tr>
+                <app-stock-editable-row *ngFor="let s of stocks" [stock]="s"></app-stock-editable-row>
             </table>
         </div>
     </div>

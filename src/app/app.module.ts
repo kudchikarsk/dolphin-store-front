@@ -9,12 +9,16 @@ import { ClientsComponent } from './clients/clients.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { StocksComponent } from './stocks/stocks.component';
-import { ClientComponent } from './clients/client/client.component';
-import { ClientTonersComponent } from './clients/client/client-toners/client-toners.component';
-import { ClientInfoComponent } from './clients/client/client-info/client-info.component';
-import { ClientAddModalComponent } from './clients/client-add-modal/client-add-modal.component';
-import { StockAddModalComponent } from './stocks/stock-add-modal/stock-add-modal.component';
-import { TonerAddModalComponent } from './clients/client/client-toners/toner-add-modal/toner-add-modal.component';
+import { UiModalComponent } from './ui-modal/ui-modal.component';
+import { TonerEditableRowComponent } from './toner-editable-row/toner-editable-row.component';
+import { ClientComponent } from './client/client.component';
+import { ClientTonersComponent } from './client-toners/client-toners.component';
+import { ClientInfoComponent } from './client-info/client-info.component';
+import { ClientAddModalComponent } from './client-add-modal/client-add-modal.component';
+import { TonerAddModalComponent } from './toner-add-modal/toner-add-modal.component';
+import { StockAddModalComponent } from './stock-add-modal/stock-add-modal.component';
+import { ClientEditableRowComponent } from './client-editable-row/client-editable-row.component';
+import { StockEditableRowComponent } from './stock-editable-row/stock-editable-row.component';
 
 let jQuery=window['jQuery'];
 
@@ -30,6 +34,10 @@ let jQuery=window['jQuery'];
     ClientAddModalComponent,
     TonerAddModalComponent,
     StockAddModalComponent,
+    UiModalComponent,
+    ClientEditableRowComponent,
+    StockEditableRowComponent,
+    TonerEditableRowComponent,
   ],
   imports: [
     BrowserModule,

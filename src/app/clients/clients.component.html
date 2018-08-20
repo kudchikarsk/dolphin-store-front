@@ -23,16 +23,7 @@
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                <tr *ngFor="let client of clients; let i = index;">
-                        <td>{{client.Name}}</td>
-                        <td>{{client.Email}}</td>
-                        <td>{{client.Mobile}}</td>
-                        <td>{{client.Address}}</td>
-                        <td>
-                            <a class="btn btn-outline-primary mr-2 my-1" routerLink="/clients/{{client.Id}}"><i class="fa fa-book"></i></a>
-                            <button class="btn btn-outline-primary my-1" ><i class="fa fa-pencil"></i></button>
-                        </td>
-                </tr>
+                <app-client-editable-row *ngFor="let c of clients" [client]="c"></app-client-editable-row>                            
             </table>
         </div>
     </div>

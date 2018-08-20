@@ -7,3 +7,11 @@ body{
 .card table{
     margin-bottom: 0px;
 }
+
+td .btn{
+    margin-right:5px;
+}
+
+table{
+    table-layout: fixed;
+}

@@ -1,0 +1,20 @@
+<ng-container *ngIf="!isEditable">
+    <td>{{client.Name}}</td>
+    <td>{{client.Email}}</td>
+    <td>{{client.Mobile}}</td>
+    <td>{{client.Address}}</td>
+    <td>
+        <a class="btn btn-primary" routerLink="/clients/{{client.Id}}"><i class="fa fa-book"></i></a>
+        <button class="btn btn-outline-primary" (click)="isEditable=true" ><i class="fa fa-pencil"></i></button>
+    </td>
+</ng-container>
+<ng-container *ngIf="isEditable">
+    <td><input type="text" class="form-control" [(ngModel)]="edit.Name" ></td>
+    <td><input type="text" class="form-control" [(ngModel)]="edit.Email"></td>
+    <td><input type="text" class="form-control" [(ngModel)]="edit.Mobile"></td>
+    <td><input type="text" class="form-control" [(ngModel)]="edit.Address"></td>
+    <td>
+        <button class="btn btn-primary" (click)="update()" ><i class="fa fa-save"></i></button>
+        <button class="btn btn-outline-primary" (click)="cancel()" ><i class="fa fa-ban"></i></button>
+    </td>
+</ng-container>

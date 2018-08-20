@@ -1,0 +1,17 @@
+<app-ui-modal [modalId]="'addTonerModal'">
+    <div class="modal-header">
+        <h5 class="modal-title">New Toner</h5>        
+      </div>
+      <div class="modal-body">
+          <form>
+              <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Toner Name" [(ngModel)]="toner.Name">
+              </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="add()"><i class="fa fa-plus"></i> Add</button>
+        <button type="button" class="btn btn-outline-primary" data-dismiss="modal" (click)="cancel()"><i class="fa fa-remove"></i> Cancel</button>
+      </div>
+</app-ui-modal>
