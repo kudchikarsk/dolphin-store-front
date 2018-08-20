@@ -20,12 +20,8 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tr *ngFor="let toner of toners; let i=index">
-                    <td>{{toner.Name}}</td>
-                    <td>
-                        <button class="btn btn-outline-primary"><i class="fa fa-pencil"></i></button>
-                    </td>
-                </tr>
+                <app-toner-editable-row *ngFor="let t of toners" [toner]="t">                    
+                </app-toner-editable-row>
             </table>
         </div>
     </div>
