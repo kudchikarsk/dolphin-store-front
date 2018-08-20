@@ -1,0 +1,55 @@
+<div class="card">
+  <div>
+      <nav class="navbar navbar-light bg-light">
+          <a class="navbar-brand">Toner Jobs</a>
+          <form class="form-inline">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-primary my-2 my-sm-0 mx-1" type="submit">Search</button>
+                  <button class="btn btn-primary my-2 my-sm-0 mx-1" data-toggle="modal" data-target="#addTonerJobsModal">
+                      <i class="fa fa-plus"></i>
+                  </button>
+          </form>
+      </nav>
+  </div>
+  <div>
+      <div class="table-responsive">
+          <table class="table table-striped table-hover">
+              <thead>
+                  <tr>
+                      <th scope="col">Client</th>
+                      <th scope="col">No of Toners</th>
+                      <th scope="col">Collected by</th>
+                      <th scope="col">In @</th>
+                      <th scope="col">Delivered by</th>
+                      <th scope="col">Out @</th>     
+                      <th scope="col">Remarks</th>
+                      <th scope="col">No of Purchases</th>
+                      <th scope="col">Total Bill</th>
+                      <th scope="col"></th>
+                  </tr>
+              </thead>
+              <tr *ngFor="let t of tonerJobs">
+                <td>{{ t.ClientName }}</td>
+                <td>{{ t.Toners.length }}</td>
+                <td>{{ t.CollectedByName }}</td>
+                <td>{{ t.In | date:'medium' }}</td>
+                <td>{{ t.DeliveredByName }}</td>
+                <td>{{ t.Out | date:'medium' }}</td>
+                <td>{{ t.Remarks }}</td>
+                <td>{{ t.PurchasedItems.length }}</td>
+                <td>{{ t.netTotal() }}</td>
+                <td>
+                  <button class="btn btn-primary" (click)="edit(t)" data-toggle="modal" data-target="#tonerJobEditModal"> 
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                  <button class="btn btn-outline-danger mt-1">
+                      <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+          </table>
+      </div>
+  </div>
+</div>
+
+<app-toner-job-edit-modal *ngIf="editTonerJob" [tonerJob]="editTonerJob"></app-toner-job-edit-modal>

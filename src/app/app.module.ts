@@ -22,6 +22,8 @@ import { StockEditableRowComponent } from './stock-editable-row/stock-editable-r
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeAddModalComponent } from './employee-add-modal/employee-add-modal.component';
 import { EmployeeEditableRowComponent } from './employee-editable-row/employee-editable-row.component';
+import { TonerJobsComponent } from './toner-jobs/toner-jobs.component';
+import { TonerJobEditModalComponent } from './toner-job-edit-modal/toner-job-edit-modal.component';
 
 let jQuery=window['jQuery'];
 
@@ -44,6 +46,8 @@ let jQuery=window['jQuery'];
     EmployeesComponent,
     EmployeeAddModalComponent,
     EmployeeEditableRowComponent,
+    TonerJobsComponent,
+    TonerJobEditModalComponent,
   ],
   imports: [
     BrowserModule,
