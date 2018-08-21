@@ -5,6 +5,7 @@ export class Client{
     Address:string;
     Mobile :string;
     Email  :string;
+    LastTransaction:Date;
 
     constructor(
     id     :number=null,
@@ -12,6 +13,7 @@ export class Client{
     address:string=null,
     mobile :string=null,
     email  :string=null,
+    lastTransaction:Date=null
     )
     {
         this.Id      =id      ;
@@ -19,6 +21,7 @@ export class Client{
         this.Address =address ;
         this.Mobile  =mobile  ;
         this.Email   =email   ;
+        this.LastTransaction=lastTransaction;
 
     }
 
@@ -28,7 +31,8 @@ export class Client{
             this.Name   ,
             this.Address,
             this.Mobile ,
-            this.Email  
+            this.Email  ,
+            this.LastTransaction
         );
       }
 
@@ -38,5 +42,6 @@ export class Client{
         this.Address =edit.Address ;
         this.Mobile  =edit.Mobile  ;
         this.Email   =edit.Email   ;
+        this.LastTransaction=edit.LastTransaction
       }
 }

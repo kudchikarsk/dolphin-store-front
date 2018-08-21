@@ -1,0 +1,40 @@
+<app-ui-modal [modalId]="'addTonerJobModal'">
+  <div class="modal-header">
+      <h5 class="modal-title" *ngIf="step==0">Step 1: Select a Client</h5>        
+      <h5 class="modal-title" *ngIf="step==1">Step 2: Select {{client.Name | slice:0:15 }}&#x27;s Toners</h5>        
+      <h5 class="modal-title" *ngIf="step==2">Step 3: Almost done!</h5>        
+    </div>
+    <div class="modal-body" *ngIf="step==0" >
+        <form class="mb-2">   
+            <input type="text" (keyup)="search($event)" class="form-control" placeholder="Search Client...">   
+        </form>
+        <div class="list-group">
+          <div *ngFor="let c of clients" (click)="selectClient(c)" class="list-group-item list-group-item-action flex-column align-items-start clickable">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">{{c.Name}}</h5>
+              <small>Last transaction: {{c.LastTransaction | date:short}}</small>
+            </div>
+            <p class="mb-1">{{c.Address}}</p>
+            <small>{{c.Email}}</small>
+          </div>
+        </div>
+    </div>
+    <div class="modal-body" *ngIf="step==1">        
+        <div class="list-group">
+          <div *ngFor="let t of toners" (click)="selectToner(t)" class="list-group-item list-group-item-action flex-column align-items-start clickable" [class.active]="t.Selected">
+            <div class="d-flex w-100 justify-content-between">
+              {{ t.Name }}
+            </div>
+          </div>
+        </div>
+        <div *ngIf="toners==null || toners.length==0" > No toners listed :(</div>
+    </div>
+    <div class="modal-body" *ngIf="step==2">
+        
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-primary" data-dismiss="modal" (click)="cancel()"><i class="fa fa-remove"></i> Cancel</button>      
+      <button *ngIf="step==1" type="button" class="btn btn-primary" (click)="gotoStep3()"><i class="fa fa-chevron-circle-right"></i> Next</button>
+      <button *ngIf="step==2" type="button" class="btn btn-primary" (click)="addTonerJob()"><i class="fa fa-plus"></i> Add</button>
+    </div>
+</app-ui-modal>

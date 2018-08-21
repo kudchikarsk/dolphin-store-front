@@ -1,7 +1,10 @@
 export class Toner{
+    
     ClientId:number;
     Id:number;
     Name:string;
+    Selected: boolean;
+
     constructor(
         id:number=0, 
         clientId:number=0, 

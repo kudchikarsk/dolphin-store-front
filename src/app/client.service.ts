@@ -12,9 +12,9 @@ export class ClientService {
 
   constructor() { }
 
-  getClients():Observable<Client[]>
+  getClients(name:string=null):Observable<Client[]>
   {
-    return of(CLIENTS);
+    return of(CLIENTS.filter(c=> name==null || c.Name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase())>-1));
   }
 
   getClientToners(id:number):Observable<Toner[]>

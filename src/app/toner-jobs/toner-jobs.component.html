@@ -5,7 +5,7 @@
           <form class="form-inline">
                   <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                   <button class="btn btn-outline-primary my-2 my-sm-0 mx-1" type="submit">Search</button>
-                  <button class="btn btn-primary my-2 my-sm-0 mx-1" data-toggle="modal" data-target="#addTonerJobsModal">
+                  <button class="btn btn-primary my-2 my-sm-0 mx-1" data-toggle="modal" data-target="#addTonerJobModal">
                       <i class="fa fa-plus"></i>
                   </button>
           </form>
@@ -42,7 +42,7 @@
                   <button class="btn btn-primary" (click)="edit(t)" data-toggle="modal" data-target="#tonerJobEditModal"> 
                     <i class="fa fa-pencil"></i>
                   </button>
-                  <button class="btn btn-outline-danger mt-1">
+                  <button class="btn btn-outline-primary mt-1">
                       <i class="fa fa-trash"></i>
                   </button>
                 </td>
@@ -53,3 +53,4 @@
 </div>
 
 <app-toner-job-edit-modal *ngIf="editTonerJob" [tonerJob]="editTonerJob"></app-toner-job-edit-modal>
+<app-toner-job-add-modal></app-toner-job-add-modal>
