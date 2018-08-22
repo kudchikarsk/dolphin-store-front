@@ -1,0 +1,14 @@
+<div class="dropdown">
+  <button class="btn dropdown-toggle" type="button" id="{{dropdownId}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <ng-container *ngIf="selected!=null">
+        {{selected.Name | slice:0:15}}
+    </ng-container>
+    <ng-container *ngIf="selected==null">
+        {{selectMessage | slice:0:15}}
+    </ng-container>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <button class="dropdown-item" (click)="select(null)">{{ selectMessage }}</button>
+    <button class="dropdown-item" *ngFor="let o of options" (click)="select(o)">{{ o.Name }}</button>
+  </div>
+</div>

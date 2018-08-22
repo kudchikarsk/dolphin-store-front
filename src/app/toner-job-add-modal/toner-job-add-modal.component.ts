@@ -3,6 +3,9 @@ import { Client } from '../models/client';
 import { ClientService } from '../client.service';
 import { Toner } from '../models/toner';
 import { TonerService } from '../toner.service';
+import { Employee } from '../models/employee';
+import { EmployeeService } from '../employee.service';
+import { TonerJob } from '../models/toner-job';
 
 @Component({
   selector: 'app-toner-job-add-modal',
@@ -12,11 +15,17 @@ import { TonerService } from '../toner.service';
 export class TonerJobAddModalComponent implements OnInit {
   step:number=0;
   clients:Client[];
-  client:Client;
   toners:Toner[];
-  constructor(private clientService:ClientService, private tonerService:TonerService) { }
+  employees:Employee[];
+  tonerJob:TonerJob;
+
+  constructor(private clientService:ClientService, private tonerService:TonerService, private employeeService:EmployeeService) { 
+    this.tonerJob=new TonerJob();
+    this.tonerJob.Toners=[];
+  }
   
   ngOnInit() {
+    this.employeeService.getEmployees().subscribe(e=>this.employees=e);
   }
   
   search($event:any){
@@ -27,19 +36,44 @@ export class TonerJobAddModalComponent implements OnInit {
   }
 
   selectClient(client:Client){
-    this.client=client;
+    if(client==null) client=new Client();
+    this.tonerJob.updateClient(client);
     this.step=1;
-    this.clientService.getClientToners(this.client.Id).subscribe(t=>this.toners=t);
+    this.clientService.getClientToners(this.tonerJob.ClientId).subscribe(t=>this.toners=t);
   }
 
-  selectToner(toner:Toner){
+  toggleTonerSelection(toner:Toner){
     toner.Selected=!toner.Selected;
+    if(toner.Selected){      
+      this.tonerJob.Toners.push(toner);
+    }
+    else{
+      let i=this.tonerJob.Toners.indexOf(toner);
+      if(i>-1){
+        this.tonerJob.Toners.splice(i,1);
+      }      
+    }
+  }
+
+  selectCollectedBy(employee:Employee){
+    if(employee==null) employee=new Employee();
+    this.tonerJob.updateCollectedBy(employee);
+  }
+
+  selectDeliveredBy(employee:Employee){
+    if(employee==null) employee=new Employee();
+    this.tonerJob.updateDeliveredBy(employee);
+  }
+
+  addTonerJob(){    
+    console.log("add toner job:"+JSON.stringify(this.tonerJob));
   }
 
   cancel(){
-    this.step    =0;
-    this.clients =null;
-    this.client  =null;
-    this.toners=null;
+    this.step = 0;    
+    this.clients = null;
+    this.toners = null;
+    this.tonerJob=new TonerJob();
+    this.tonerJob.Toners=[];
   }
 }

@@ -9,6 +9,7 @@ import { JQ_TOKEN } from '../jquery.service';
 export class UiModalComponent implements OnInit {
   @ViewChild("modal") modalEle: ElementRef;  
   @Input() modalId:string;
+  @Input() modalLg:boolean;
 
   constructor(@Inject(JQ_TOKEN) private $:any) { }
 

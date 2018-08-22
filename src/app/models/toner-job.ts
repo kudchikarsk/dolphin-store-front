@@ -3,7 +3,8 @@ import { Employee } from "./employee";
 import { Toner } from "./toner";
 import { PurchaseItem } from "./purchase-item";
 
-export class TonerJob {    
+export class TonerJob {
+        
     Id              :number        ;
     ClientId        :number        ;
     CollectedById   :number        ;
@@ -21,25 +22,23 @@ export class TonerJob {
     Toners          :Toner[]       ;
     PurchasedItems  :PurchaseItem[];
     
-    private NetTotal       :number;
-    
     constructor(
-        id              :number        ,
-        clientId        :number        ,
-        collectedById   :number        ,
-        deliveredById   :number        ,
-        remarks         :string        ,
-        otherCharges    :number        ,
-        discount        :number        ,
-        inn              :Date         ,
-        out             :Date          ,
-        modified        :Date          ,
-        created         :Date          ,
-        clientName      :string        ,
-        collectedByName :string        ,
-        deliveredByName :string        ,
-        toners          :Toner[]       ,
-        purchaseItems   :PurchaseItem[]        
+        id              :number         =null,
+        clientId        :number         =null,
+        collectedById   :number         =null,
+        deliveredById   :number         =null,
+        remarks         :string         =null,
+        otherCharges    :number         =null,
+        discount        :number         =null,
+        inn              :Date          =null,
+        out             :Date           =null,
+        modified        :Date           =null,
+        created         :Date           =null,
+        clientName      :string         =null,
+        collectedByName :string         =null,
+        deliveredByName :string         =null,
+        toners          :Toner[]        =null,
+        purchaseItems   :PurchaseItem[] =null        
     ) {
         this.Id              = id              ;
         this.ClientId        = clientId        ;
@@ -56,11 +55,12 @@ export class TonerJob {
         this.CollectedByName = collectedByName ;
         this.DeliveredByName = deliveredByName ;
         this.Toners          = toners          ;
-        this.PurchasedItems   = purchaseItems   ;
-
+        this.PurchasedItems   = purchaseItems  ;
     }
 
     updateAmount(target:number){
+        this.Discount=0;
+        this.OtherCharges=0;
         let grossTotal=this.grossTotal();
         var diff = target - grossTotal;
         if (diff < 0){
@@ -72,12 +72,28 @@ export class TonerJob {
             
     }
 
+    updateClient(client: Client): void {    
+        this.ClientId=client.Id;
+        this.ClientName=client.Name;
+    }
+
+    updateCollectedBy(employee: Employee): void {
+        this.CollectedById=employee.Id;
+        this.CollectedByName=employee.Name;
+    }
+
+    updateDeliveredBy(employee: Employee): void {
+        this.DeliveredById=employee.Id;
+        this.DeliveredByName=employee.Name;
+    }
+
     grossTotal(): number {
+        if(this.PurchasedItems==null || this.PurchasedItems==undefined) return this.OtherCharges;
         return this.PurchasedItems.map(p=>p.StockItem.SellingPrice * p.StockItem.Quantity).reduce((t,s) => t+s) + this.OtherCharges;
     }
 
-    netTotal(){        
+    netTotal(): number {        
         let grossTotal=this.grossTotal();
-        return this.NetTotal= Math.ceil(grossTotal - (this.Discount * grossTotal));
+        return Math.ceil(grossTotal - (this.Discount * grossTotal));
     }
 }

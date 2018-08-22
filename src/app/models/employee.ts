@@ -1,5 +1,4 @@
-export class Employee{  
-  
+export class Employee{
     Id     :number;
     Name   :string;
     Address:string;
