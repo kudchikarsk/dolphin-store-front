@@ -89,13 +89,12 @@
                 <label>Net Total</label>     
                 <input type="number" class="form-control" [ngModel]="tonerJob.netTotal()" (keyup)="tonerJob.updateAmount($event.target.value)"> 
             </div>
-         </div>
-         <div class="form-group">
-                <label>Remarks</label>     
-                <textarea [(ngModel)]="tonerJob.Remarks" class="form-control"></textarea>
+            <div class="form-group col-md-12">
+                    <label>Remarks</label>     
+                    <textarea [(ngModel)]="tonerJob.Remarks" class="form-control" rows="3"></textarea>
+                </div>
             </div>
-        </div>
-        
+         </div> 
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-primary" data-dismiss="modal" (click)="cancel()"><i class="fa fa-remove"></i> Cancel</button>      
