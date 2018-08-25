@@ -2,11 +2,12 @@
   <div class="modal-header">
       <h5 class="modal-title" *ngIf="step==0">Step 1: Select a Client</h5>        
       <h5 class="modal-title" *ngIf="step==1">Step 2: Select {{tonerJob.clientName | slice:0:15 }}&#x27;s Toners</h5>        
-      <h5 class="modal-title" *ngIf="step==2">Step 3: Almost done!</h5>        
+      <h5 class="modal-title" *ngIf="step==2">Step 3: Add Purchased Items</h5>        
+      <h5 class="modal-title" *ngIf="step==3">Step 4: Almost done!</h5>        
     </div>
     <div class="modal-body" *ngIf="step==0" >
         <form class="mb-2">   
-            <input type="text" (keyup)="search($event)" class="form-control" placeholder="Search Client...">   
+            <input type="text" (keyup)="searchClients($event.target.value)" class="form-control" placeholder="Search Client...">   
         </form>
         <div class="list-group">
           <div *ngFor="let c of clients" (click)="selectClient(c)" class="list-group-item list-group-item-action flex-column align-items-start clickable">
@@ -23,13 +24,41 @@
         <div class="list-group">
           <div *ngFor="let t of toners" (click)="toggleTonerSelection(t)" class="list-group-item list-group-item-action flex-column align-items-start clickable" [class.active]="t.Selected">
             <div class="d-flex w-100 justify-content-between">
-              {{ t.Name }}
+                <h5 class="mb-1">{{ t.Name }}</h5>              
             </div>
           </div>
         </div>
         <div *ngIf="toners==null || toners.length==0" > No toners listed :(</div>
     </div>
-    <div class="modal-body" *ngIf="step==2">
+    <div class="modal-body" *ngIf="step==2">        
+        <form class="mb-2">   
+            <input type="text" (keyup)="searchStockItems($event.target.value)" class="form-control" placeholder="Search Stock Items...">   
+        </form>
+        <div class="list-group">
+          <div *ngFor="let s of stockItems" (click)="addPurchasedItem(s)" class="list-group-item list-group-item-action flex-column align-items-start clickable">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{s.Name}}</h5>
+                <small>Quantity: {{s.Quantity}}</small>
+            </div>
+          </div>
+        </div>
+        <div class="list-group mt-2">
+            <div *ngFor="let p of tonerJob.PurchasedItems"  class="list-group-item list-group-item-action flex-column align-items-start clickable">
+                <div class="form-row">
+                    <div class="col-md-5">
+                        <h5 class="mt-2">{{p.StockItem.Name}}</h5>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="number" [(ngModel)]="p.Quantity" class="form-control" placeholder="Quantity">
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-outlined-primary" (click)="removePurchasedItem(p)"><i class="fa fa-trash"></i></button>
+                    </div>
+                </div>                
+            </div>        
+        </div>        
+    </div>
+    <div class="modal-body" *ngIf="step==3">
         <div class="form-row">           
           <div class="form-group col-md-6">
               <label>Collected By</label>     
@@ -61,12 +90,17 @@
                 <input type="number" class="form-control" [ngModel]="tonerJob.netTotal()" (keyup)="tonerJob.updateAmount($event.target.value)"> 
             </div>
          </div>
+         <div class="form-group">
+                <label>Remarks</label>     
+                <textarea [(ngModel)]="tonerJob.Remarks" class="form-control"></textarea>
+            </div>
         </div>
         
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-primary" data-dismiss="modal" (click)="cancel()"><i class="fa fa-remove"></i> Cancel</button>      
       <button *ngIf="step==1" type="button" class="btn btn-primary" [disabled]="tonerJob.Toners.length==0" (click)="step=2"><i class="fa fa-chevron-circle-right"></i> Next</button>
-      <button *ngIf="step==2" type="button" class="btn btn-primary" (click)="addTonerJob()"><i class="fa fa-plus"></i> Add</button>
+      <button *ngIf="step==2" type="button" class="btn btn-primary" [disabled]="tonerJob.PurchasedItems.length==0" (click)="step=3"><i class="fa fa-chevron-circle-right"></i> Next</button>
+      <button *ngIf="step==3" type="button" class="btn btn-primary" (click)="addTonerJob()"><i class="fa fa-plus"></i> Add</button>
     </div>
 </app-ui-modal>

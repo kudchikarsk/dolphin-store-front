@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Client } from '../models/client';
 import { ClientService } from '../client.service';
 import { Toner } from '../models/toner';
@@ -6,6 +6,10 @@ import { TonerService } from '../toner.service';
 import { Employee } from '../models/employee';
 import { EmployeeService } from '../employee.service';
 import { TonerJob } from '../models/toner-job';
+import { StockService } from '../stock.service';
+import { StockItem } from '../models/stock';
+import { PurchaseItem } from '../models/purchase-item';
+import { UiModalComponent } from '../ui-modal/ui-modal.component';
 
 @Component({
   selector: 'app-toner-job-add-modal',
@@ -17,22 +21,41 @@ export class TonerJobAddModalComponent implements OnInit {
   clients:Client[];
   toners:Toner[];
   employees:Employee[];
+  stockItems:StockItem[];
   tonerJob:TonerJob;
+  @ViewChild(UiModalComponent) modal;
 
-  constructor(private clientService:ClientService, private tonerService:TonerService, private employeeService:EmployeeService) { 
-    this.tonerJob=new TonerJob();
-    this.tonerJob.Toners=[];
+  constructor(private clientService:ClientService, private tonerService:TonerService, private employeeService:EmployeeService, private stockService:StockService) { 
+    this.tonerJob=new TonerJob();    
   }
   
   ngOnInit() {
     this.employeeService.getEmployees().subscribe(e=>this.employees=e);
   }
   
-  search($event:any){
-    console.log("search fired!");
-    let name:string=$event.target.value;
+  searchClients(name:string):void {
+    console.log("search clients fired!");
     if(name==null || name.trim()=="") return;
     this.clientService.getClients(name).subscribe(c=>this.clients=c);
+  }
+
+  searchStockItems(name:string):void {
+    console.log("search stockitems fired!");
+    if(name==null || name.trim()=="") return;
+    this.stockService.getStocks(name).subscribe(s=>this.stockItems=s);
+  }
+
+  addPurchasedItem(s:StockItem){
+    this.stockItems=[];
+    if(this.tonerJob.PurchasedItems.map(p=>p.StockItem).indexOf(s)>-1) return;
+    this.tonerJob.PurchasedItems.push(new PurchaseItem(undefined,1,s));
+  }
+
+  removePurchasedItem(value:PurchaseItem){
+    var index=this.tonerJob.PurchasedItems.indexOf(value);
+    if(index>-1){
+      this.tonerJob.PurchasedItems.splice(index,1);
+    }
   }
 
   selectClient(client:Client){
@@ -67,6 +90,7 @@ export class TonerJobAddModalComponent implements OnInit {
 
   addTonerJob(){    
     console.log("add toner job:"+JSON.stringify(this.tonerJob));
+    this.modal.close();
   }
 
   cancel(){
@@ -74,6 +98,5 @@ export class TonerJobAddModalComponent implements OnInit {
     this.clients = null;
     this.toners = null;
     this.tonerJob=new TonerJob();
-    this.tonerJob.Toners=[];
   }
 }

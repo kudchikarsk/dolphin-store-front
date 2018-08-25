@@ -37,8 +37,8 @@ export class TonerJob {
         clientName      :string         =null,
         collectedByName :string         =null,
         deliveredByName :string         =null,
-        toners          :Toner[]        =null,
-        purchaseItems   :PurchaseItem[] =null        
+        toners          :Toner[]        =[],
+        purchaseItems   :PurchaseItem[] =[]        
     ) {
         this.Id              = id              ;
         this.ClientId        = clientId        ;

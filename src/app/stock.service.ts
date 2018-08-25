@@ -10,8 +10,8 @@ export class StockService {
 
   constructor() { }
 
-  getStocks():Observable<StockItem[]>{
-    return of(STOCKS);
+  getStocks(name:string=null):Observable<StockItem[]>{
+    return of(STOCKS.filter(s=> name==null || s.Name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase())>-1));
   }
 
   getStock(id:number):Observable<StockItem>{
