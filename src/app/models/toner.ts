@@ -1,30 +1,29 @@
-export class Toner{
+export class Toner implements IToner {
     
     ClientId:number;
     Id:number;
     Name:string;
     Selected: boolean;
 
-    constructor(
-        id:number=0, 
-        clientId:number=0, 
-        name:string=null)
+    constructor(toner:IToner=null)
     {
-        this.Id=id;
-        this.ClientId=clientId;
-        this.Name=name;
+        if(toner!=null){
+            this.Id=toner.Id;
+            this.ClientId=toner.ClientId;
+            this.Name=toner.Name;
+        }
     }
 
-    copy(): Toner{
-        return new Toner(
-            this.Id,
-            this.ClientId,
-            this.Name);
+    update(toner:IToner):void {
+        this.Id=toner.Id;
+        this.ClientId=toner.ClientId;
+        this.Name=toner.Name;
     }
+}
 
-    update(edit:Toner):void {
-        this.Id=edit.Id;
-        this.ClientId=edit.ClientId;
-        this.Name=edit.Name;
-    }
+export interface IToner
+{
+    ClientId:number;
+    Id:number;
+    Name:string;
 }

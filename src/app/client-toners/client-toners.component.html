@@ -3,8 +3,8 @@
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand">Toners</a>
             <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-primary my-2 my-sm-0 mx-1" type="submit">Search</button>
+                <input class="form-control mr-sm-2" name="name" [(ngModel)]="name" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-primary my-2 my-sm-0 mx-1" (click)="search()" type="submit">Search</button>
                 <button class="btn btn-primary my-2 my-sm-0 mx-1"  data-toggle="modal" data-target="#addTonerModal">
                     <i class="fa fa-plus"></i>
                 </button>
@@ -20,10 +20,10 @@
                         <th></th>
                     </tr>
                 </thead>
-                <app-toner-editable-row *ngFor="let t of toners" [toner]="t">                    
+                <app-toner-editable-row *ngFor="let t of toners" [toner]="t" (deleteTonerEvent)="removeToner($event)">                    
                 </app-toner-editable-row>
             </table>
         </div>
     </div>
 </div>
-<app-toner-add-modal [clientId]="clientId"></app-toner-add-modal>
+<app-toner-add-modal [clientId]="clientId" (newTonerEvent)="toners.push($event)"></app-toner-add-modal>

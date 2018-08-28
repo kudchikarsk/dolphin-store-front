@@ -1,6 +1,8 @@
-import { Component, OnInit, Input, ElementRef, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, Inject, ViewChild, Output, EventEmitter } from '@angular/core';
 import { UiModalComponent } from '../ui-modal/ui-modal.component';
 import { Toner } from '../models/toner';
+import { TonerService } from '../toner.service';
+import { SERVER_TRANSITION_PROVIDERS } from '@angular/platform-browser/src/browser/server-transition';
 
 @Component({
   selector: 'app-toner-add-modal',
@@ -9,20 +11,30 @@ import { Toner } from '../models/toner';
 })
 export class TonerAddModalComponent implements OnInit {
   @Input() clientId:number;
+  @Output() newTonerEvent:EventEmitter<Toner>=new EventEmitter();
   @ViewChild(UiModalComponent) modal: UiModalComponent;
-  toner:Toner;
+  toner:Toner=new Toner();
 
-  constructor() { 
+  constructor(private tonerService:TonerService) { 
 
   }
 
   ngOnInit() {
-    this.toner=new Toner(undefined,this.clientId);
+    this.initToner();
+  }
+
+  initToner(): void {
+    this.toner=new Toner();
+    this.toner.ClientId=this.clientId;
   }
 
   add(){
-    console.log("add toner:"+JSON.stringify(this.toner));
-    this.close();
+    console.log(this.toner);
+    this.tonerService.addToner(this.toner).subscribe(t=>{
+      this.newTonerEvent.emit(new Toner(t));
+      this.close();
+    });
+    
   }
 
   cancel(){
@@ -30,7 +42,7 @@ export class TonerAddModalComponent implements OnInit {
   }
 
   close(): void {
-    this.toner=new Toner(undefined,this.clientId);
+    this.initToner();
     this.modal.close();    
   }
 

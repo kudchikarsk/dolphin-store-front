@@ -62,7 +62,7 @@ export class TonerJobAddModalComponent implements OnInit {
     if(client==null) client=new Client();
     this.tonerJob.updateClient(client);
     this.step=1;
-    this.clientService.getClientToners(this.tonerJob.ClientId).subscribe(t=>this.toners=t);
+    this.tonerService.getClientToners(this.tonerJob.ClientId).subscribe(ts=>this.toners=ts.map(t=>new Toner(t)));
   }
 
   toggleTonerSelection(toner:Toner){

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Toner } from '../models/toner';
+import { TonerService } from '../toner.service';
 
 @Component({
   selector: 'app-toner-editable-row',
@@ -8,23 +9,31 @@ import { Toner } from '../models/toner';
 })
 export class TonerEditableRowComponent implements OnInit {
   @Input() toner:Toner;
+  @Output() deleteTonerEvent:EventEmitter<Toner>=new EventEmitter();
   edit:Toner;
   isEditable:boolean;
-  constructor() { }
+  constructor(private tonerService:TonerService) { }
 
   ngOnInit() {
-    this.edit=this.toner.copy();
+    this.edit=new Toner(this.toner);
   }
 
   update(){
-    this.toner.update(this.edit);
-    console.log("update toner:"+JSON.stringify(this.toner));
-    this.isEditable=false;
+    this.tonerService.updateToner(this.edit).subscribe(t=>{
+      this.toner.update(t);
+      this.isEditable=false;
+    });
   }
 
   cancel(){
-    this.edit=this.toner.copy();
+    this.edit=new Toner(this.toner);
     this.isEditable=false;
+  }
+
+  delete(){
+    this.tonerService.deleteToner(this.toner.Id).subscribe(r=>{
+      this.deleteTonerEvent.emit(this.toner);
+    });
   }
 
 }
