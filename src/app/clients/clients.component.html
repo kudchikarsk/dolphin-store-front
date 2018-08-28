@@ -3,8 +3,8 @@
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand">Clients</a>
             <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-primary my-2 my-sm-0 mx-1" type="submit">Search</button>
+                    <input class="form-control mr-sm-2" name="name" [(ngModel)]="name" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-primary my-2 my-sm-0 mx-1" type="submit" (click)="search()">Search</button>
                     <button class="btn btn-primary my-2 my-sm-0 mx-1" data-toggle="modal" data-target="#addClientModal">
                         <i class="fa fa-plus"></i>
                     </button>
@@ -23,10 +23,10 @@
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                <app-client-editable-row *ngFor="let c of clients" [client]="c"></app-client-editable-row>                            
+                <app-client-editable-row *ngFor="let c of clients" [client]="c" (deleteClientEvent)="removeClient($event)"></app-client-editable-row>                            
             </table>
         </div>
     </div>
 </div>
  
-<app-client-add-modal></app-client-add-modal>
+<app-client-add-modal (newClientEvent)="clients.push($event)"></app-client-add-modal>

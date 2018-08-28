@@ -9,12 +9,23 @@ import { ClientService } from "./../client.service";
 })
 export class ClientsComponent implements OnInit {
   
-  clients:Array<Client>=[];
+  clients:Client[]=[];
+  name:string;
 
   constructor(private clientService:ClientService) { }
 
   ngOnInit() {
-    this.clientService.getClients().subscribe(c=> this.clients=c);
+    this.clientService.getClients().subscribe(cs=> this.clients=cs.map(c=>new Client(c)));
   }
 
+  search(){
+    this.clientService.getClients(this.name).subscribe(cs=>this.clients=cs.map(c=>new Client(c)));
+  }
+
+  removeClient(c:Client){
+    let index=this.clients.indexOf(c);
+    if(index>-1){
+      this.clients.splice(index,1);
+    }
+  }
 }

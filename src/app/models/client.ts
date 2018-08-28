@@ -1,4 +1,4 @@
-export class Client{  
+export class Client implements IClient{  
   
     Id     :number;
     Name   :string;
@@ -7,41 +7,34 @@ export class Client{
     Email  :string;
     LastTransaction:Date;
 
-    constructor(
-    id     :number=null,
-    name   :string=null,
-    address:string=null,
-    mobile :string=null,
-    email  :string=null,
-    lastTransaction:Date=null
-    )
+    constructor(client:IClient=null)
     {
-        this.Id      =id      ;
-        this.Name    =name    ;
-        this.Address =address ;
-        this.Mobile  =mobile  ;
-        this.Email   =email   ;
-        this.LastTransaction=lastTransaction;
-
+        if(client!=null) {
+            this.Id      =client.Id      ;
+            this.Name    =client.Name    ;
+            this.Address =client.Address ;
+            this.Mobile  =client.Mobile  ;
+            this.Email   =client.Email   ;
+            this.LastTransaction=client.LastTransaction;
+        }
     }
 
-    copy(): Client {
-        return new Client(
-            this.Id     ,
-            this.Name   ,
-            this.Address,
-            this.Mobile ,
-            this.Email  ,
-            this.LastTransaction
-        );
+      update(client: IClient): any {
+        this.Id      =client.Id      ;
+        this.Name    =client.Name    ;
+        this.Address =client.Address ;
+        this.Mobile  =client.Mobile  ;
+        this.Email   =client.Email   ;
+        this.LastTransaction=client.LastTransaction
       }
+}
 
-      update(edit: Client): any {
-        this.Id      =edit.Id      ;
-        this.Name    =edit.Name    ;
-        this.Address =edit.Address ;
-        this.Mobile  =edit.Mobile  ;
-        this.Email   =edit.Email   ;
-        this.LastTransaction=edit.LastTransaction
-      }
+export interface IClient
+{
+    Id     :number;
+    Name   :string;
+    Address:string;
+    Mobile :string;
+    Email  :string;
+    LastTransaction:Date;
 }

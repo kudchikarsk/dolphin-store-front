@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { UiModalComponent } from '../ui-modal/ui-modal.component';
 import { Client } from '../models/client';
+import { ClientService } from '../client.service';
 
 @Component({
   selector: 'app-client-add-modal',
@@ -10,16 +11,22 @@ import { Client } from '../models/client';
 export class ClientAddModalComponent implements OnInit {
   @ViewChild(UiModalComponent) modal:UiModalComponent;
   client:Client;
+  @Output() newClientEvent:EventEmitter<Client>=new EventEmitter();
 
-  constructor() { 
-    this.client=new Client(undefined,"M/s.");
+  constructor(private clientService:ClientService) { 
+    this.client=new Client();
   }
 
   ngOnInit() {
   }
 
   add(){
-    this.close();
+    console.log(this.client);
+    this.clientService.addClient(this.client).subscribe(c=>{
+      this.newClientEvent.emit(new Client(c));
+      this.close();
+    });
+    
   }
 
   cancel(){
@@ -27,7 +34,7 @@ export class ClientAddModalComponent implements OnInit {
   }
 
   close(): void {
-    this.client=new Client(undefined,"M/s.");
+    this.client=new Client();
     this.modal.close();    
   }
 

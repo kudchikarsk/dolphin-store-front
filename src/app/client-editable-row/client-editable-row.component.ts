@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Client } from '../models/client';
+import { ClientService } from '../client.service';
 
 @Component({
   selector: 'app-client-editable-row',
@@ -9,25 +10,33 @@ import { Client } from '../models/client';
 export class ClientEditableRowComponent implements OnInit {
   
   @Input() client:Client;
+  @Output() deleteClientEvent:EventEmitter<Client>=new EventEmitter();
   edit:Client=new Client();
   isEditable:boolean;
 
-  constructor() { 
+  constructor(private clientService:ClientService) { 
     
   }
 
   ngOnInit() {
-    this.edit=this.client.copy();
+    this.edit=new Client(this.client);
+  }
+
+  delete(){
+    this.clientService.deleteClient(this.client.Id).subscribe(r=>{
+      this.deleteClientEvent.emit(this.client);
+    });
   }
 
   update(){
-    this.client.update(this.edit);
-    console.log("update client:"+JSON.stringify(this.client));
-    this.isEditable=false;
+    this.clientService.updateClient(this.edit).subscribe(c=>{
+      this.client.update(c);
+      this.isEditable=false;
+    });    
   }
 
   cancel(){
-    this.edit=this.client.copy();
+    this.edit=new Client(this.client);
     this.isEditable=false;
   }
 

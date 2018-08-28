@@ -36,7 +36,7 @@ export class TonerJobAddModalComponent implements OnInit {
   searchClients(name:string):void {
     console.log("search clients fired!");
     if(name==null || name.trim()=="") return;
-    this.clientService.getClients(name).subscribe(c=>this.clients=c);
+    this.clientService.getClients(name).subscribe(cs=>this.clients=cs.map(c=>new Client(c)));
   }
 
   searchStockItems(name:string):void {
