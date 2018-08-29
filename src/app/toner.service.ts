@@ -11,7 +11,7 @@ import { environment } from '../environments/environment';
 export class TonerService {
   
   
-  tonerUrl:string=`${environment.apiEndpoint}toner`
+  tonerURL:string=`${environment.apiEndpoint}toner`
 
   constructor(private http:HttpClient) { }
 
@@ -23,18 +23,18 @@ export class TonerService {
     const options = name ?
     { params: new HttpParams().set('clientId', `${clientId}`).set('name', name) } : { params: new HttpParams().set('clientId', `${clientId}`) };
 
-    return this.http.get<IToner[]>(`${this.tonerUrl}`,options);
+    return this.http.get<IToner[]>(`${this.tonerURL}`,options);
   }
 
   addToner(toner: Toner): Observable<IToner> {
-    return this.http.post<IToner>(this.tonerUrl,toner);
+    return this.http.post<IToner>(this.tonerURL,toner);
   }
 
   deleteToner(id:number): Observable<any> {
-    return this.http.delete(`${this.tonerUrl}/${id}`);
+    return this.http.delete(`${this.tonerURL}/${id}`);
   }
 
   updateToner(toner: Toner): Observable<IToner> {
-    return this.http.put<IToner>(`${this.tonerUrl}/${toner.Id}`,toner);
+    return this.http.put<IToner>(`${this.tonerURL}/${toner.Id}`,toner);
   }
 }

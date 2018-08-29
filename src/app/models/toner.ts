@@ -7,7 +7,7 @@ export class Toner implements IToner {
 
     constructor(toner:IToner=null)
     {
-        if(toner!=null){
+        if(toner!=null) {
             this.Id=toner.Id;
             this.ClientId=toner.ClientId;
             this.Name=toner.Name;

@@ -1,8 +1,8 @@
 import { Employee } from "../models/employee";
 
 export const EMPLOYEES:Employee[]=[
-    new Employee(1,"Dr Strange","New York", "9999999", "strange@gmail.com"),
-    new Employee(2,"Spiderman","New York", "9999999", "spider@gmail.com"),
-    new Employee(3,"Captain America","Queens, New York", "9999999", "america@gmail.com"),
-    new Employee(4,"Ironman","New York", "9999999", "stark@gmail.com"),
+    new Employee({Id:1,Name:"Dr Strange"     ,Address:"New York"        , Mobile:"9999999", Email:"strange@gmail.com"}),
+    new Employee({Id:2,Name:"Spiderman"      ,Address:"New York"        , Mobile:"9999999", Email:"spider@gmail.com" }),
+    new Employee({Id:3,Name:"Captain America",Address:"Queens, New York", Mobile:"9999999", Email:"america@gmail.com"}),
+    new Employee({Id:4,Name:"Ironman"        ,Address:"New York"        , Mobile:"9999999", Email:"stark@gmail.com"  }),
 ];

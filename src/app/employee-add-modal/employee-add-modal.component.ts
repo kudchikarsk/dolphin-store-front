@@ -12,7 +12,7 @@ export class EmployeeAddModalComponent implements OnInit {
   employee:Employee;
 
   constructor() { 
-    this.employee=new Employee(undefined,"Mr.");
+    this.employee=new Employee();
   }
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class EmployeeAddModalComponent implements OnInit {
   }
 
   close(): void {
-    this.employee=new Employee(undefined,"Mr.");
+    this.employee=new Employee();
     this.modal.close();    
   }
 }

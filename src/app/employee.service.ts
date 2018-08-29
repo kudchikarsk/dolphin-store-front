@@ -1,16 +1,41 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Employee } from './models/employee';
+import { Employee, IEmployee } from './models/employee';
 import { EMPLOYEES } from './mocks/mock-employees';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
 
-  constructor() { }
+  employeeURL:string=`${environment.apiEndpoint}employee`
 
-  getEmployees():Observable<Employee[]>{
-    return of(EMPLOYEES);
+  constructor(private http:HttpClient) { }
+
+  getEmployees(name:string=null):Observable<IEmployee[]>
+  {
+    const options = name ?
+     { params: new HttpParams().set('name', name) } : {};
+  
+    return this.http.get<IEmployee[]>(this.employeeURL,options);
   }
+
+  getClient(id:number):Observable<IEmployee>
+  {
+    return this.http.get<IEmployee>(`${this.employeeURL}/${id}`);
+  }
+
+  addClient(employee:IEmployee):Observable<IEmployee> {
+    return this.http.post<IEmployee>(this.employeeURL,employee);
+  }
+
+  updateClient(employee: IEmployee):Observable<IEmployee> {
+    return this.http.put<IEmployee>(`${this.employeeURL}/${employee.Id}`,employee);
+  }
+
+  deleteClient(id: number): Observable<any> {
+    return this.http.delete(`${this.employeeURL}/${id}`);
+  }  
 }

@@ -1,41 +1,35 @@
-export class Employee{
+export class Employee implements IEmployee {
     Id     :number;
     Name   :string;
     Address:string;
     Mobile :string;
     Email  :string;
 
-    constructor(
-    id     :number=null,
-    name   :string=null,
-    address:string=null,
-    mobile :string=null,
-    email  :string=null,
-    )
+    constructor(employee:IEmployee=null)
     {
-        this.Id      =id      ;
-        this.Name    =name    ;
-        this.Address =address ;
-        this.Mobile  =mobile  ;
-        this.Email   =email   ;
-
+        if(employee!=null) {
+        this.Id      =employee.Id      ;
+        this.Name    =employee.Name    ;
+        this.Address =employee.Address ;
+        this.Mobile  =employee.Mobile  ;
+        this.Email   =employee.Email   ;
+        }
     }
 
-    copy(): Employee {
-        return new Employee(
-            this.Id     ,
-            this.Name   ,
-            this.Address,
-            this.Mobile ,
-            this.Email  
-        );
-      }
-
-      update(edit: Employee): any {
+    update(edit: IEmployee):void {
         this.Id      =edit.Id      ;
         this.Name    =edit.Name    ;
         this.Address =edit.Address ;
         this.Mobile  =edit.Mobile  ;
         this.Email   =edit.Email   ;
-      }
+    }
+}
+
+export interface IEmployee
+{
+    Id     :number;
+    Name   :string;
+    Address:string;
+    Mobile :string;
+    Email  :string;
 }

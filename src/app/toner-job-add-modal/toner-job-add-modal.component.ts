@@ -30,7 +30,7 @@ export class TonerJobAddModalComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.employeeService.getEmployees().subscribe(e=>this.employees=e);
+    this.employeeService.getEmployees().subscribe(es=>this.employees=es.map(e=>new Employee(e)));
   }
   
   searchClients(name:string):void {

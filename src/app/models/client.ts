@@ -19,14 +19,14 @@ export class Client implements IClient{
         }
     }
 
-      update(client: IClient): any {
+    update(client: IClient):void {
         this.Id      =client.Id      ;
         this.Name    =client.Name    ;
         this.Address =client.Address ;
         this.Mobile  =client.Mobile  ;
         this.Email   =client.Email   ;
         this.LastTransaction=client.LastTransaction
-      }
+    }
 }
 
 export interface IClient

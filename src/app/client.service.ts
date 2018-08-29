@@ -14,7 +14,7 @@ import { environment } from '../environments/environment';
 })
 export class ClientService {
     
-  clientUrl:string=`${environment.apiEndpoint}client`;
+  clientURL:string=`${environment.apiEndpoint}client`;
 
   constructor(private http:HttpClient) { }
 
@@ -23,23 +23,23 @@ export class ClientService {
     const options = name ?
      { params: new HttpParams().set('name', name) } : {};
   
-    return this.http.get<IClient[]>(this.clientUrl,options);
+    return this.http.get<IClient[]>(this.clientURL,options);
   }
 
   getClient(id:number):Observable<IClient>
   {
-    return this.http.get<IClient>(`${this.clientUrl}/${id}`);
+    return this.http.get<IClient>(`${this.clientURL}/${id}`);
   }
 
   addClient(client:IClient):Observable<IClient> {
-    return this.http.post<IClient>(this.clientUrl,client);
+    return this.http.post<IClient>(this.clientURL,client);
   }
 
   updateClient(client: IClient):Observable<IClient> {
-    return this.http.put<IClient>(`${this.clientUrl}/${client.Id}`,client);
+    return this.http.put<IClient>(`${this.clientURL}/${client.Id}`,client);
   }
 
   deleteClient(id: number): Observable<any> {
-    return this.http.delete(`${this.clientUrl}/${id}`);
+    return this.http.delete(`${this.clientURL}/${id}`);
   }  
 }

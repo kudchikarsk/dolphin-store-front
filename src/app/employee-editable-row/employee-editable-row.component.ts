@@ -14,7 +14,7 @@ export class EmployeeEditableRowComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.edit=this.employee.copy();
+    this.edit=new Employee(this.employee);
   }
 
   update(){
@@ -24,7 +24,7 @@ export class EmployeeEditableRowComponent implements OnInit {
   }
 
   cancel(){
-    this.edit=this.employee.copy();    
+    this.edit=new Employee(this.employee);    
     this.isEditable=false;
   }
 
