@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Employee } from '../models/employee';
+import { EmployeeService } from '../employee.service';
 
 @Component({
   selector: 'app-employee-editable-row',
@@ -11,20 +12,29 @@ export class EmployeeEditableRowComponent implements OnInit {
   @Input() employee:Employee;
   edit:Employee;
   isEditable:boolean;
-  constructor() { }
+  @Output() deleteEmployeeEvent:EventEmitter<Employee>=new EventEmitter();
+
+  constructor(private employeeService:EmployeeService) { }
 
   ngOnInit() {
     this.edit=new Employee(this.employee);
   }
+  
+  delete(){
+    this.employeeService.deleteEmployee(this.employee.Id).subscribe(r=>{
+      this.deleteEmployeeEvent.emit(this.employee);
+    });
+  }
 
   update(){
-    this.employee.update(this.edit);
-    console.log("update employee:"+JSON.stringify(this.employee));
-    this.isEditable=false;
+    this.employeeService.updateEmployee(this.edit).subscribe(e=>{
+      this.employee.update(e);
+      this.isEditable=false;
+    });    
   }
 
   cancel(){
-    this.edit=new Employee(this.employee);    
+    this.edit=new Employee(this.employee);
     this.isEditable=false;
   }
 

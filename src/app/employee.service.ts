@@ -22,20 +22,20 @@ export class EmployeeService {
     return this.http.get<IEmployee[]>(this.employeeURL,options);
   }
 
-  getClient(id:number):Observable<IEmployee>
+  getEmployee(id:number):Observable<IEmployee>
   {
     return this.http.get<IEmployee>(`${this.employeeURL}/${id}`);
   }
 
-  addClient(employee:IEmployee):Observable<IEmployee> {
+  addEmployee(employee:IEmployee):Observable<IEmployee> {
     return this.http.post<IEmployee>(this.employeeURL,employee);
   }
 
-  updateClient(employee: IEmployee):Observable<IEmployee> {
+  updateEmployee(employee: IEmployee):Observable<IEmployee> {
     return this.http.put<IEmployee>(`${this.employeeURL}/${employee.Id}`,employee);
   }
 
-  deleteClient(id: number): Observable<any> {
+  deleteEmployee(id: number): Observable<any> {
     return this.http.delete(`${this.employeeURL}/${id}`);
   }  
 }

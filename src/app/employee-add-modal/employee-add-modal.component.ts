@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import { UiModalComponent } from '../ui-modal/ui-modal.component';
 import { Employee } from '../models/employee';
+import { EmployeeService } from '../employee.service';
 
 @Component({
   selector: 'app-employee-add-modal',
@@ -10,8 +11,9 @@ import { Employee } from '../models/employee';
 export class EmployeeAddModalComponent implements OnInit {
   @ViewChild(UiModalComponent) modal:UiModalComponent;
   employee:Employee;
+  @Output() newEmployeeEvent:EventEmitter<Employee>=new EventEmitter();
 
-  constructor() { 
+  constructor(private employeeService:EmployeeService) { 
     this.employee=new Employee();
   }
 
@@ -19,8 +21,12 @@ export class EmployeeAddModalComponent implements OnInit {
   }
 
   add(){
-    console.log("add employee:"+JSON.stringify(this.employee));
-    this.close();
+    console.log(this.employee);
+    this.employeeService.addEmployee(this.employee).subscribe(c=>{
+      this.newEmployeeEvent.emit(new Employee(c));
+      this.close();
+    });
+    
   }
 
   cancel(){
