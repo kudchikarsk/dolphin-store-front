@@ -42,7 +42,7 @@ export class TonerJobAddModalComponent implements OnInit {
   searchStockItems(name:string):void {
     console.log("search stockitems fired!");
     if(name==null || name.trim()=="") return;
-    this.stockService.getStocks(name).subscribe(s=>this.stockItems=s);
+    this.stockService.getStockItems(name).subscribe(ss=>this.stockItems=ss.map(s=>new StockItem(s)));
   }
 
   addPurchasedItem(s:StockItem){

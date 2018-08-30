@@ -3,8 +3,8 @@
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand">Stocks</a>
             <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-primary my-2 my-sm-0 mx-1" type="submit">Search</button>
+                    <input class="form-control mr-sm-2" name="name" [(ngModel)]="name" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-primary my-2 my-sm-0 mx-1" (click)="search()" type="submit">Search</button>
                     <button class="btn btn-primary my-2 my-sm-0 mx-1" data-toggle="modal" data-target="#addStockModal">
                         <i class="fa fa-plus"></i>
                     </button>
@@ -23,10 +23,10 @@
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                <app-stock-editable-row *ngFor="let s of stocks" [stock]="s"></app-stock-editable-row>
+                <app-stock-editable-row *ngFor="let s of stockItems" [stockItem]="s" (deleteStockItemEvent)="removeStockItem($event)"></app-stock-editable-row>
             </table>
         </div>
     </div>
 </div>
   
-<app-stock-add-modal></app-stock-add-modal>
+<app-stock-add-modal (newStockItemEvent)="stockItems.push($event)"></app-stock-add-modal>

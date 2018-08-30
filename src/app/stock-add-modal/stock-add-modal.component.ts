@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { UiModalComponent } from '../ui-modal/ui-modal.component';
 import { StockItem } from '../models/stock';
+import { StockService } from '../stock.service';
 
 @Component({
   selector: 'app-stock-add-modal',
@@ -10,8 +11,9 @@ import { StockItem } from '../models/stock';
 export class StockAddModalComponent implements OnInit {
   @ViewChild(UiModalComponent) modal:UiModalComponent;
   stockItem:StockItem;
+  @Output() newStockItemEvent:EventEmitter<StockItem>=new EventEmitter();
 
-  constructor() { 
+  constructor(private stockItemService:StockService) { 
     this.stockItem=new StockItem();
   }
 
@@ -19,8 +21,12 @@ export class StockAddModalComponent implements OnInit {
   }
 
   add(){
-    console.log("add stock:"+JSON.stringify(this.stockItem));
-    this.close();
+    console.log(this.stockItem);
+    this.stockItemService.addStockItem(this.stockItem).subscribe(c=>{
+      this.newStockItemEvent.emit(new StockItem(c));
+      this.close();
+    });
+    
   }
 
   cancel(){
@@ -29,7 +35,7 @@ export class StockAddModalComponent implements OnInit {
 
   close(): void {
     this.stockItem=new StockItem();
-    this.modal.close();
+    this.modal.close();    
   }
 
 }

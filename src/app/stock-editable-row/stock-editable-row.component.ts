@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { StockItem } from '../models/stock';
+import { StockService } from '../stock.service';
 
 @Component({
   selector: 'app-stock-editable-row',
@@ -7,23 +8,32 @@ import { StockItem } from '../models/stock';
   styleUrls: ['./stock-editable-row.component.css']
 })
 export class StockEditableRowComponent implements OnInit {
-  @Input() stock:StockItem;
+  @Input() stockItem:StockItem;
   edit:StockItem;
   isEditable:boolean;
-  constructor() { }
+  @Output() deleteStockItemEvent:EventEmitter<StockItem>=new EventEmitter();
+
+  constructor(private stockItemService:StockService) { }
 
   ngOnInit() {
-    this.edit=this.stock.copy();
+    this.edit=new StockItem(this.stockItem);
+  }
+  
+  delete(){
+    this.stockItemService.deleteStockItem(this.stockItem.Id).subscribe(r=>{
+      this.deleteStockItemEvent.emit(this.stockItem);
+    });
   }
 
   update(){
-    this.stock.update(this.edit);
-    console.log("stock update:"+JSON.stringify(this.stock));
-    this.isEditable=false;
+    this.stockItemService.updateStockItem(this.edit).subscribe(e=>{
+      this.stockItem.update(e);
+      this.isEditable=false;
+    });    
   }
 
   cancel(){
-    this.edit=this.stock.copy();
+    this.edit=new StockItem(this.stockItem);
     this.isEditable=false;
   }
 
