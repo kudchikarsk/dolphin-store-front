@@ -13,7 +13,7 @@ export class TonerJobsComponent implements OnInit {
   constructor(private tonerJobService:TonerJobService) { }
 
   ngOnInit() {
-      this.tonerJobService.getTonerJobs().subscribe(t=>this.tonerJobs=t);
+      this.tonerJobService.getTonerJobs().subscribe(ts=>this.tonerJobs=ts.map(t=>new TonerJob(t)));
   }
 
   edit(tonerJob:TonerJob){

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import { Client } from '../models/client';
 import { ClientService } from '../client.service';
 import { Toner } from '../models/toner';
@@ -10,6 +10,7 @@ import { StockService } from '../stock.service';
 import { StockItem } from '../models/stock';
 import { PurchaseItem } from '../models/purchase-item';
 import { UiModalComponent } from '../ui-modal/ui-modal.component';
+import { TonerJobService } from '../toner-job.service';
 
 @Component({
   selector: 'app-toner-job-add-modal',
@@ -24,8 +25,13 @@ export class TonerJobAddModalComponent implements OnInit {
   stockItems:StockItem[];
   tonerJob:TonerJob;
   @ViewChild(UiModalComponent) modal;
-
-  constructor(private clientService:ClientService, private tonerService:TonerService, private employeeService:EmployeeService, private stockService:StockService) { 
+  @Output() newTonerJobEvent:EventEmitter<TonerJob>=new EventEmitter();
+  constructor(
+    private clientService:ClientService, 
+    private tonerService:TonerService, 
+    private employeeService:EmployeeService, 
+    private stockService:StockService,
+    private tonerJobService:TonerJobService) { 
     this.tonerJob=new TonerJob();    
   }
   
@@ -88,15 +94,21 @@ export class TonerJobAddModalComponent implements OnInit {
     this.tonerJob.updateDeliveredBy(employee);
   }
 
-  addTonerJob(){    
-    console.log("add toner job:"+JSON.stringify(this.tonerJob));
-    this.modal.close();
+  addTonerJob(){
+    console.log(this.tonerJob);
+    this.tonerJobService.addTonerJob(this.tonerJob).subscribe(t=>{
+      this.newTonerJobEvent.emit(new TonerJob(t));
+      this.close();
+    });
+    
   }
 
   cancel(){
-    this.step = 0;    
-    this.clients = null;
-    this.toners = null;
+    this.close();
+  }
+
+  close(): void {
     this.tonerJob=new TonerJob();
+    this.modal.close();    
   }
 }

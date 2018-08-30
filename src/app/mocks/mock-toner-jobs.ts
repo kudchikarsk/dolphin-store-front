@@ -5,7 +5,7 @@ import { STOCKS } from "./mock-stocks";
 import { TONERS } from "./mock-toners";
 
 export const TONER_JOBS:TonerJob[]=[
-    new TonerJob(1,1,1,1,"Changed Roller",20,0.2,new Date(),new Date(),new Date(),new Date(),"Mr. Nice","Spiderman","Spiderman",[TONERS[0]],[new PurchaseItem(1,2,STOCKS[0])]),
-    new TonerJob(1,1,1,1,"Changed Drum",20,0.2,new Date(),new Date(),new Date(),new Date(),"Mr. Nice","Spiderman","Spiderman",[TONERS[1]],[new PurchaseItem(1,2,STOCKS[2])]),
-    new TonerJob(1,1,1,1,"Serviceing",20,0.2,new Date(),new Date(),new Date(),new Date(),"Mr. Nice","Spiderman","Spiderman",[TONERS[2]],[new PurchaseItem(1,2,STOCKS[1])])
+    new TonerJob({Id:1, ClientId: 1, CollectedById:1, DeliveredById:1,Remarks:"Changed Roller",OtherCharges:20,Discount:0.2,In:new Date(),Out:new Date(),Created :new Date(),Modified:new Date(),ClientName:"Mr. Nice", CollectedByName: "Spiderman", DeliveredByName: "Spiderman", Toners:[TONERS[0]], PurchasedItems:[new PurchaseItem(1,2,STOCKS[0])]}),
+    new TonerJob({Id:1, ClientId: 1, CollectedById:1, DeliveredById:1,Remarks:"Changed Drum"  ,OtherCharges:20,Discount:0.2,In:new Date(),Out:new Date(),Created :new Date(),Modified:new Date(),ClientName:"Mr. Nice", CollectedByName: "Spiderman", DeliveredByName: "Spiderman", Toners:[TONERS[1]], PurchasedItems:[new PurchaseItem(1,2,STOCKS[2])]}),
+    new TonerJob({Id:1, ClientId: 1, CollectedById:1, DeliveredById:1,Remarks:"Serviceing"    ,OtherCharges:20,Discount:0.2,In:new Date(),Out:new Date(),Created :new Date(),Modified:new Date(),ClientName:"Mr. Nice", CollectedByName: "Spiderman", DeliveredByName: "Spiderman", Toners:[TONERS[2]], PurchasedItems:[new PurchaseItem(1,2,STOCKS[1])]})
 ];
