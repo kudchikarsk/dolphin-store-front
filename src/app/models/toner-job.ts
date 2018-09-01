@@ -45,6 +45,8 @@ export class TonerJob implements ITonerJob {
         else{
             this.Toners=[];
             this.PurchasedItems=[];
+            this.OtherCharges = 0;
+            this.Discount = 0;
         }
     }
 
@@ -101,12 +103,13 @@ export class TonerJob implements ITonerJob {
 
     grossTotal(): number {
         if(this.PurchasedItems==null || this.PurchasedItems==undefined) return this.OtherCharges;
-        return this.PurchasedItems.map(p=>p.StockItem.SellingPrice * p.StockItem.Quantity).reduce((t,s) => t+s,0) + this.OtherCharges;
+        return this.PurchasedItems.map(p=>p.StockItem.SellingPrice * p.Quantity).reduce((x,y) => x+y,0) + this.OtherCharges;
     }
 
     netTotal(): number {        
         let grossTotal=this.grossTotal();
-        return Math.ceil(grossTotal - (this.Discount * grossTotal));
+        let total= Math.ceil(grossTotal - (this.Discount * grossTotal));
+        return total;
     }
 
     purchaseCount():number {
