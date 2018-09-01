@@ -78,7 +78,7 @@ export class TonerJob implements ITonerJob {
     }
 
     update(edit: ITonerJob): void {
-        
+
         if(edit==null) throw new Error("edit value cannot be null!");
 
         this.Id              = edit.Id               ;
@@ -107,6 +107,10 @@ export class TonerJob implements ITonerJob {
     netTotal(): number {        
         let grossTotal=this.grossTotal();
         return Math.ceil(grossTotal - (this.Discount * grossTotal));
+    }
+
+    purchaseCount():number {
+        return this.PurchasedItems.map(p=>p.Quantity).reduce((x,y)=>x+y,0);
     }
 }
 

@@ -2,16 +2,16 @@
   <td>{{ tonerJob.ClientName }}</td>
   <td>{{ tonerJob.Toners.length }}</td>
   <td>{{ tonerJob.CollectedByName }}</td>
-  <td>{{ tonerJob.In | date:'medium' }}</td>
+  <td>{{ tonerJob.In | date:'mediumDate' }}</td>
   <td>{{ tonerJob.DeliveredByName }}</td>
-  <td>{{ tonerJob.Out | date:'medium' }}</td>
+  <td>{{ tonerJob.Out | date:'mediumDate' }}</td>
   <td>{{ tonerJob.Remarks }}</td>
-  <td>{{ tonerJob.PurchasedItems.length }}</td>
+  <td>{{ tonerJob.purchaseCount() }}</td>
   <td>{{ tonerJob.netTotal() }}</td>
   <td>
-    <button class="btn btn-primary" (click)="edit(tonerJob)" data-toggle="modal" data-target="#tonerJobEditModal"> 
+    <!-- <button class="btn btn-primary" (click)="edit(tonerJob)" data-toggle="modal" data-target="#tonerJobEditModal"> 
       <i class="fa fa-pencil"></i>
-    </button>
+    </button> -->
     <button class="btn btn-primary mt-1" (click)="delete()">
         <i class="fa fa-trash"></i>
     </button>
