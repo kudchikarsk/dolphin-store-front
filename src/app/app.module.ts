@@ -24,9 +24,9 @@ import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeAddModalComponent } from './employee-add-modal/employee-add-modal.component';
 import { EmployeeEditableRowComponent } from './employee-editable-row/employee-editable-row.component';
 import { TonerJobsComponent } from './toner-jobs/toner-jobs.component';
-import { TonerJobEditModalComponent } from './toner-job-edit-modal/toner-job-edit-modal.component';
 import { TonerJobAddModalComponent } from './toner-job-add-modal/toner-job-add-modal.component';
 import { UiDropdownComponent } from './ui-dropdown/ui-dropdown.component';
+import { TonerJobEditableRowComponent } from './toner-job-editable-row/toner-job-editable-row.component';
 
 let jQuery=window['jQuery'];
 
@@ -50,9 +50,9 @@ let jQuery=window['jQuery'];
     EmployeeAddModalComponent,
     EmployeeEditableRowComponent,
     TonerJobsComponent,
-    TonerJobEditModalComponent,
     TonerJobAddModalComponent,
     UiDropdownComponent,
+    TonerJobEditableRowComponent,
   ],
   imports: [
     BrowserModule,

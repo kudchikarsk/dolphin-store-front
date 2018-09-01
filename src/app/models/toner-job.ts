@@ -77,9 +77,31 @@ export class TonerJob implements ITonerJob {
         this.DeliveredByName=employee.Name;
     }
 
+    update(edit: ITonerJob): void {
+        
+        if(edit==null) throw new Error("edit value cannot be null!");
+
+        this.Id              = edit.Id               ;
+        this.ClientId        = edit.ClientId         ;
+        this.CollectedById   = edit.CollectedById    ;
+        this.DeliveredById   = edit.DeliveredById    ;
+        this.Remarks         = edit.Remarks          ;
+        this.OtherCharges    = edit.OtherCharges     ;
+        this.Discount        = edit.Discount         ;
+        this.In              = edit.In               ;
+        this.Out             = edit.Out              ;
+        this.Modified        = edit.Modified         ;
+        this.Created         = edit.Created          ;
+        this.ClientName      = edit.ClientName       ;
+        this.CollectedByName = edit.CollectedByName  ;
+        this.DeliveredByName = edit.DeliveredByName  ;
+        this.Toners          = edit.Toners           ;
+        this.PurchasedItems  = edit.PurchasedItems   ;
+      }
+
     grossTotal(): number {
         if(this.PurchasedItems==null || this.PurchasedItems==undefined) return this.OtherCharges;
-        return this.PurchasedItems.map(p=>p.StockItem.SellingPrice * p.StockItem.Quantity).reduce((t,s) => t+s) + this.OtherCharges;
+        return this.PurchasedItems.map(p=>p.StockItem.SellingPrice * p.StockItem.Quantity).reduce((t,s) => t+s,0) + this.OtherCharges;
     }
 
     netTotal(): number {        

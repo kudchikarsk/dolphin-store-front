@@ -26,6 +26,7 @@ export class TonerJobAddModalComponent implements OnInit {
   tonerJob:TonerJob;
   @ViewChild(UiModalComponent) modal;
   @Output() newTonerJobEvent:EventEmitter<TonerJob>=new EventEmitter();
+
   constructor(
     private clientService:ClientService, 
     private tonerService:TonerService, 
@@ -36,6 +37,10 @@ export class TonerJobAddModalComponent implements OnInit {
   }
   
   ngOnInit() {
+    this.loadEmployees();
+  }
+
+  loadEmployees(): void {
     this.employeeService.getEmployees().subscribe(es=>this.employees=es.map(e=>new Employee(e)));
   }
   
@@ -109,6 +114,10 @@ export class TonerJobAddModalComponent implements OnInit {
 
   close(): void {
     this.tonerJob=new TonerJob();
+    this.step=0;
+    this.clients=[];
+    this.toners=[];
+    this.stockItems=[];
     this.modal.close();    
   }
 }

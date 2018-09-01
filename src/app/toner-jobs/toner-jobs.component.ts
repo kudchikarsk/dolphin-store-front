@@ -19,4 +19,11 @@ export class TonerJobsComponent implements OnInit {
   edit(tonerJob:TonerJob){
     this.editTonerJob=tonerJob;
   }
+
+  removeTonerJob(tonerJob:TonerJob):void {
+    let index=this.tonerJobs.indexOf(tonerJob);
+    if(index>-1){
+      this.tonerJobs.splice(index,1);
+    }
+  }
 }
