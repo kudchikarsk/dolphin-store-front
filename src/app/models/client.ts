@@ -5,7 +5,6 @@ export class Client implements IClient{
     Address:string;
     Mobile :string;
     Email  :string;
-    LastTransaction:Date;
 
     constructor(client:IClient=null)
     {
@@ -15,7 +14,6 @@ export class Client implements IClient{
             this.Address =client.Address ;
             this.Mobile  =client.Mobile  ;
             this.Email   =client.Email   ;
-            this.LastTransaction=client.LastTransaction;
         }
     }
 
@@ -25,7 +23,6 @@ export class Client implements IClient{
         this.Address =client.Address ;
         this.Mobile  =client.Mobile  ;
         this.Email   =client.Email   ;
-        this.LastTransaction=client.LastTransaction
     }
 }
 
@@ -36,5 +33,4 @@ export interface IClient
     Address:string;
     Mobile :string;
     Email  :string;
-    LastTransaction:Date;
 }

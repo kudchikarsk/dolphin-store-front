@@ -27,6 +27,7 @@ import { TonerJobsComponent } from './toner-jobs/toner-jobs.component';
 import { TonerJobAddModalComponent } from './toner-job-add-modal/toner-job-add-modal.component';
 import { UiDropdownComponent } from './ui-dropdown/ui-dropdown.component';
 import { TonerJobEditableRowComponent } from './toner-job-editable-row/toner-job-editable-row.component';
+import {NgbModule, NgbDateNativeAdapter, NgbDateAdapter} from '@ng-bootstrap/ng-bootstrap';
 
 let jQuery=window['jQuery'];
 
@@ -58,10 +59,12 @@ let jQuery=window['jQuery'];
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [
-    {provide:JQ_TOKEN, useValue:jQuery}
+    {provide:JQ_TOKEN, useValue:jQuery},
+    {provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}
   ],
   bootstrap: [AppComponent]
 })

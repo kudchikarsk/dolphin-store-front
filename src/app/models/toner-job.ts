@@ -47,6 +47,8 @@ export class TonerJob implements ITonerJob {
             this.PurchasedItems=[];
             this.OtherCharges = 0;
             this.Discount = 0;
+            this.In=new Date();
+            this.Out=new Date();
         }
     }
 
