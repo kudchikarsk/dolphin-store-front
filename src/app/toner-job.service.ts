@@ -18,7 +18,10 @@ export class TonerJobService {
     let options = {};
 
     if($in!=null && $out !=null){
-      options={ params: new HttpParams().set('@in', JSON.stringify($in)).set('@out', JSON.stringify($out)) };
+      options={ params: new HttpParams().set('fromDate', $in.toDateString()).set('toDate', $out.toDateString()) };
+    }
+    else if($in!=null){
+      options={ params: new HttpParams().set('fromDate', $in.toDateString()).set('toDate', $in.toDateString()) };
     }
   
     return this.http.get<ITonerJob[]>(this.tonerJobURL,options);

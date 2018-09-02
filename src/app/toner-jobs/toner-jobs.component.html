@@ -2,7 +2,35 @@
   <div>
       <nav class="navbar navbar-light bg-light">
           <a class="navbar-brand">Toner Jobs</a>
-          <form class="form-inline">
+          <form class="form-inline">    
+
+                <input type="hidden"  class="form-control" ngbDatepicker #d="ngbDatepicker" (dateSelect)="onDateSelection($event)" [autoClose]="'outside'" [dayTemplate]="t" [displayMonths]="2" />
+                <ng-template #t let-date="date" let-focused="focused">
+                    <span class="custom-day"
+                          [class.focused]="focused"
+                          [class.range]="isRange(date)"
+                          [class.faded]="isHovered(date) || isInside(date)"
+                          (mouseenter)="hoveredDate = date"
+                          (mouseleave)="hoveredDate = null">
+                      {{ date.day }}
+                    </span>
+                  </ng-template>           
+                  
+                <button type="button" class="btn btn-outline-primary mr-sm-2" (click)="d.toggle()">
+                        <ng-container *ngIf="fromDate">
+                                {{getFromDate() | date:"mediumDate"}}
+                        </ng-container>
+                        <ng-container *ngIf="toDate">
+                                - {{getToDate() | date:"mediumDate"}}
+                        </ng-container>
+                </button>
+                                
+                <button type="button" class="btn btn-outline-primary mr-sm-2" (click)="resetDateRange()" >Today</button>
+                <div class="btn-group mr-sm-2" role="group">                    
+                    <button type="button" class="btn btn-outline-primary" [class.active]="listState==0" (click)="getInOut()">In - Out</button>
+                    <button type="button" class="btn btn-outline-primary" [class.active]="listState==1" (click)="getIn()"   >In</button>
+                    <button type="button" class="btn btn-outline-primary" [class.active]="listState==2" (click)="getOut()"  >Out</button>
+                </div>
                   <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                   <button class="btn btn-outline-primary my-2 my-sm-0 mx-1" type="submit">Search</button>
                   <button class="btn btn-primary my-2 my-sm-0 mx-1" data-toggle="modal" data-target="#addTonerJobModal">
